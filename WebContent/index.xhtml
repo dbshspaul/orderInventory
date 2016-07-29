@@ -10,8 +10,8 @@
 </h:head>
 <h:body>
 	<h:form>
-	<h:inputText value="#{name}" />
-	<h:commandButton action="response" value="submit" />
+	<h:inputText value="#{cat.name}" />
+	<h:commandButton action="#{bean.setCategory(cat)}" value="submit" />
 	</h:form>
 </h:body>
 </html>
