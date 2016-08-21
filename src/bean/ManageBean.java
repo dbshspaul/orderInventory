@@ -1,26 +1,43 @@
 package bean;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import model.Category;
 
 @ManagedBean(name = "bean", eager = true)
 @RequestScoped
-public class ManageBean {
+public class ManageBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	bean.EJB ejb;
+	private Category cat;
 	
-	private Category c;
-	
-	@PersistenceContext
-	EntityManager em;
 
 	public Category getCategory(int id){
-		return em.find(Category.class, id);
+		return ejb.getCategory(id);
+	}
+	
+	public List<Category> getAllData(){
+		return ejb.getAllData();
 	}
 	
 	public void setCategory(){
-		em.persist(c);
+		ejb.setCategory(getCat());
 	}
+
+	public Category getCat() {
+		return cat;
+	}
+
+	public void setCat(Category cat) {
+		this.cat = cat;
+	}
+	
 }
