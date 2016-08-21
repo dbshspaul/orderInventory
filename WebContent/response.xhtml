@@ -2,21 +2,47 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Response</title>
 </h:head>
 <h:body>
-	<h:dataTable value="#{bean.allData}" var="c" bgcolor="Gray">
-		<h:column>
-			<f:facet name="header">ID</f:facet>
-#{c.id}
-</h:column>
-		<h:column>
-			<f:facet name="header">Name</f:facet>
-#{c.name}
-</h:column>
-	</h:dataTable>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" resizable="true" size="100"
+			minSize="40" maxSize="200">
+			<p:breadCrumb>
+				<p:menuitem value="Categories" url="#" />
+				<p:menuitem value="Sports" url="#" />
+				<p:menuitem value="Basketball" url="#" />
+				<p:menuitem value="NBA" url="#" />
+				<p:menuitem value="Teams" url="#" />
+				<p:menuitem value="L.A. Lakers" url="#" />
+				<p:menuitem value="Roster" url="#" />
+				<p:menuitem value="Kobe Bryant" url="#" />
+			</p:breadCrumb>
+
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" resizable="true" size="200" minSize="40"
+			maxSize="200">
+			<ui:include src="sideMenu.xhtml"></ui:include>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<p:outputLabel value="Center" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" resizable="true" size="100" minSize="40"
+			maxSize="200">
+			<p:outputLabel value="East" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="south" resizable="true" size="100"
+			minSize="40" maxSize="200">
+			<p:outputLabel value="South" />
+		</p:layoutUnit>
+	</p:layout>
 </h:body>
 </html>

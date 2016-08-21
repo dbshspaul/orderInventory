@@ -2,12 +2,15 @@ package model;
 
 import java.io.Serializable;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.hibernate.validator.constraints.Length;
-
+@ManagedBean
+@RequestScoped
 @Entity
 public class Category implements Serializable {
 
@@ -16,6 +19,7 @@ public class Category implements Serializable {
 	@GeneratedValue
 	private int id;
 	private String name;
+	@Column(length = 2000)
 	private String description;
 
 	public int getId() {

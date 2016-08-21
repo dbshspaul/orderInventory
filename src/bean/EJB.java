@@ -6,23 +6,31 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import model.Category;
-
 @Stateless
 public class EJB {
 
 	@PersistenceContext
 	private EntityManager em;
 	
-	public Category getCategory(int id){
-		return em.find(Category.class, id);
+	/////////////////common methode form all entity classes///////////////////////////////
+	public <T> T getDataById(int id, Class<T> t) {
+		return em.find(t, id);
+	}
+
+	public <T> List<T> getAllData(Class<T> t) {
+		return em.createQuery("select c from " + t.getCanonicalName() + " c", t).getResultList();
+	}
+
+	public <T> void setData(T obj) {
+		em.persist(obj);
 	}
 	
-	public void setCategory(Category c){		
-		em.persist(c);
+	public <T> void updateData(T obj) {
+		em.merge(obj);
 	}
 	
-	public List<Category> getAllData(){
-		return em.createQuery("select c from Category c",Category.class ).getResultList();
+	public <T> void deleteData(T obj) {
+		em.remove(obj);
 	}
+/////////////////END of common methode form all entity classes///////////////////////////////
 }
