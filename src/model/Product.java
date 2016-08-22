@@ -1,31 +1,22 @@
 package model;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-@ManagedBean
-@RequestScoped
 @Entity
-public class Category implements Serializable {
+public class Product {
 
-	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue
 	private int id;
 	private String name;
 	@Column(length = 2000)
 	private String description;
 	
-	@OneToMany(mappedBy="category")
-	private List<Product> products;
+	@ManyToOne@JoinColumn(name="categoryId")
+	private Category category;
 
 	public int getId() {
 		return id;
@@ -51,12 +42,11 @@ public class Category implements Serializable {
 		this.description = description;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
-
 }

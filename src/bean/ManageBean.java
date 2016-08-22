@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 import model.Category;
+import model.Product;
 
 @ManagedBean(name = "bean", eager = true)
 @ApplicationScoped
@@ -18,6 +19,7 @@ public class ManageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Category cate;
+	private Product product;
 	@EJB
 	private bean.EJB ejb;
 
@@ -61,6 +63,8 @@ public class ManageBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+		
 
 	public Category getCate() {
 		return cate;
@@ -68,6 +72,14 @@ public class ManageBean implements Serializable {
 
 	public void setCate(Category cate) {
 		this.cate = cate;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 }
