@@ -1,52 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>hello world</title>
 </h:head>
 <h:body>
-	<p:growl id="growl" showDetail="true" sticky="false" /> 
-	<p:dialog widgetVar="dlg">
-		<h:form>
-
-			<p:panelGrid columns="2">
-				<f:facet name="header">Enter Category Details</f:facet>
-				<h:outputText value="Category Name: " id="name" />
-				<p:inputText value="#{category.name}"
-					pt:placeholder="Enter Category Name" />
-				<h:outputText value="Category Description: " />
-				<p:editor value="#{category.description}" />
-				<p:commandButton action="#{bean.setCategory(category)}"
-					value="submit" update="growl"/>
-			</p:panelGrid>
-		</h:form>
-	</p:dialog>
-
-	<p:commandButton value="Show" type="button" onclick="PF('dlg').show()" />
-	<p:commandButton value="Hide" type="button" onclick="PF('dlg').hide()" />
-
-	<p:dataTable value="#{bean.allData}" var="c">
-		<p:column>
-			<f:facet name="header">ID</f:facet>
-			<p:outputLabel value="#{c.id}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">Name</f:facet>
-			<p:outputLabel value="#{c.name}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">Description</f:facet>
-			<p:outputLabel value="#{c.description}" />
-		</p:column>
-		<p:column>
-		<f:facet name="header">Edit</f:facet>
-		
-		</p:column>
-	</p:dataTable>
+	<p:growl id="growl" showDetail="true" sticky="false" />
+	<p:commandButton value="Dont Like" type="button" onclick="window.location='response.xhtml'" />
+	<p:commandButton value="Like" type="button" onclick="window.location='productMaster.xhtml'" />
 </h:body>
 </html>

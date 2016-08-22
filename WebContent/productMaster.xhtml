@@ -1,11 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
@@ -19,20 +15,33 @@
 			<p:panelGrid columns="2">
 				<f:facet name="header">Enter Category Details</f:facet>
 				<h:outputText value="Category Name: " id="name" />
-				<p:inputText value="#{category.name}"
-					pt:placeholder="Enter Category Name" required="true" />
+				<p:inputText value="#{category.name}" pt:placeholder="Enter Category Name" required="true" />
 				<h:outputText value="Category Description: " />
 				<p:editor value="#{category.description}" required="true" />
-				<p:commandButton action="#{bean.setCategory(category)}"
-					value="submit" update="dtble :growl" />
+				<p:commandButton action="#{bean.setCategory(category)}" value="submit" update=":from:dtble :growl" />
 			</p:panelGrid>
 		</h:form>
 	</p:dialog>
 
 
+	<p:dialog widgetVar="dlg1">
+		<h:form id="updateFrm">
+
+			<p:panelGrid columns="2">
+				<f:facet name="header">Enter Category Details</f:facet>
+				<h:outputText value="Category Name: " id="name" />
+				<p:inputText value="#{bean.cate.name}" binding="#{category.name}" pt:placeholder="Enter Category Name" required="true" />
+				<h:outputText value="Category Description: " />
+				<p:editor value="#{bean.cate.description}" required="true" />
+				<p:commandButton action="#{bean.updateCategory(bean.cate)}" value="submit" update=":from:dtble :growl" />
+			</p:panelGrid>
+		</h:form>
+	</p:dialog>
+
+
+
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" resizable="true" size="100"
-			minSize="40" maxSize="200">
+		<p:layoutUnit position="north" resizable="true" size="100" minSize="40" maxSize="200">
 			<p:breadCrumb>
 				<p:menuitem value="INV" url="index.xhtml" />
 				<p:menuitem value="Product Master" url="response.xhtml" />
@@ -41,63 +50,71 @@
 
 		</p:layoutUnit>
 
-		<p:layoutUnit position="west" resizable="true" size="200" minSize="40"
-			maxSize="200">
+		<p:layoutUnit position="west" resizable="true" size="200" minSize="40" maxSize="200">
 			<ui:include src="sideMenu.xhtml"></ui:include>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<p:commandButton value="Add Category" type="button"
-				onclick="PF('dlg').show()" />
-			<p:commandButton value="Close" type="button"
-				onclick="PF('dlg').hide()" />
-			<p:dataTable value="#{bean.allData}" var="c" id="dtble"
-				editable="true">
-				<f:facet name="header">Category list</f:facet>
-				<p:ajax event="rowEdit" listener="#{bean.updateCategory}"
-					update="dtble :growl" />
-				<p:ajax event="rowEditCancel" update="dtble :growl" />
-					
-				<p:column headerText="ID">
-					<p:outputLabel value="#{c.id}" />
-				</p:column>
 
-				<p:column headerText="Name">
-					<p:cellEditor>
-						<f:facet name="output">
-							<h:outputText value="#{c.name}" />
-						</f:facet>
-						<f:facet name="input">
-							<p:inputText value="#{c.name}"
-								pt:placeholder="Enter Category Name" />
-						</f:facet>
-					</p:cellEditor>
-				</p:column>
+			<p:commandButton value="Add Category" type="button" onclick="PF('dlg').show()" />
 
-				<p:column headerText="Description">
-					<p:cellEditor>
-						<f:facet name="output">
-							<h:outputText value="#{c.description}" escape="false" />
-						</f:facet>
-						<f:facet name="input">
-							<p:inputText value="#{c.description}"
-								pt:placeholder="Enter Category Name" />
-						</f:facet>
-					</p:cellEditor>
-				</p:column>
-				<p:column style="width:32px">
-					<p:rowEditor />
-				</p:column>
-			</p:dataTable>
+			<h:form id="from">
+				<p:dataTable value="#{bean.allData}" var="c" id="dtble">				
+
+					<f:facet name="header">Category list</f:facet>
+
+					<p:column headerText="ID">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{c.id}" />
+							</f:facet>
+							<f:facet name="input">
+								<h:outputText value="#{c.id}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Name">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{c.name}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{c.name}" pt:placeholder="Enter Category Name" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Description">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{c.description}" escape="false" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInput" value="#{c.description}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column style="width:32px">					
+						<p:commandButton value="edit" onclick="PF('dlg1').show()" update="updateFrm">
+							<f:setPropertyActionListener value="#{c}" target="#{bean.cate}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column style="width:32px;text-align: center">
+						<p:commandButton icon="fa fa-user" action="#{bean.deleteCategory(c)}" update=":from:dtble :growl" />
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
 		</p:layoutUnit>
 
-		<p:layoutUnit position="east" resizable="true" size="100" minSize="40"
-			maxSize="200">
+		<p:layoutUnit position="east" resizable="true" size="100" minSize="40" maxSize="200">
 			<p:outputLabel value="East" />
 		</p:layoutUnit>
 
-		<p:layoutUnit position="south" resizable="true" size="100"
-			minSize="40" maxSize="200">
+		<p:layoutUnit position="south" resizable="true" size="100" minSize="40" maxSize="200">
 			<p:outputLabel value="South" />
 		</p:layoutUnit>
 	</p:layout>

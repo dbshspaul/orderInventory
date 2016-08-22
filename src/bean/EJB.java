@@ -11,8 +11,9 @@ public class EJB {
 
 	@PersistenceContext
 	private EntityManager em;
-	
-	/////////////////common methode form all entity classes///////////////////////////////
+
+	///////////////// common methode form all entity
+	///////////////// classes///////////////////////////////
 	public <T> T getDataById(int id, Class<T> t) {
 		return em.find(t, id);
 	}
@@ -24,13 +25,15 @@ public class EJB {
 	public <T> void setData(T obj) {
 		em.persist(obj);
 	}
-	
+
 	public <T> void updateData(T obj) {
 		em.merge(obj);
 	}
-	
-	public <T> void deleteData(T obj) {
-		em.remove(obj);
+
+	public <T> void deleteData(int id, Class<T> t) {
+		em.remove(getDataById(id, t));
 	}
-/////////////////END of common methode form all entity classes///////////////////////////////
+
+	///////////////// END of common methode form all entity
+	///////////////// classes///////////////////////////////
 }

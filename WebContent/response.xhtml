@@ -1,32 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Response</title>
 </h:head>
 <h:body>
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" resizable="true" size="100"
-			minSize="40" maxSize="200">
+		<p:layoutUnit position="north" resizable="true" size="100" minSize="40" maxSize="200">
 			<p:breadCrumb>
-				<p:menuitem value="Categories" url="#" />
-				<p:menuitem value="Sports" url="#" />
-				<p:menuitem value="Basketball" url="#" />
-				<p:menuitem value="NBA" url="#" />
-				<p:menuitem value="Teams" url="#" />
-				<p:menuitem value="L.A. Lakers" url="#" />
-				<p:menuitem value="Roster" url="#" />
-				<p:menuitem value="Kobe Bryant" url="#" />
+				<p:menuitem value="INV" url="index.xhtml" />
+				<p:menuitem value="Category" url="#" />
 			</p:breadCrumb>
 
 		</p:layoutUnit>
 
-		<p:layoutUnit position="west" resizable="true" size="200" minSize="40"
-			maxSize="200">
+		<p:layoutUnit position="west" resizable="true" size="200" minSize="40" maxSize="200">
 			<ui:include src="sideMenu.xhtml"></ui:include>
 		</p:layoutUnit>
 
@@ -34,13 +22,11 @@
 			<p:outputLabel value="Center" />
 		</p:layoutUnit>
 
-		<p:layoutUnit position="east" resizable="true" size="100" minSize="40"
-			maxSize="200">
+		<p:layoutUnit position="east" resizable="true" size="100" minSize="40" maxSize="200">
 			<p:outputLabel value="East" />
 		</p:layoutUnit>
 
-		<p:layoutUnit position="south" resizable="true" size="100"
-			minSize="40" maxSize="200">
+		<p:layoutUnit position="south" resizable="true" size="100" minSize="40" maxSize="200">
 			<p:outputLabel value="South" />
 		</p:layoutUnit>
 	</p:layout>
