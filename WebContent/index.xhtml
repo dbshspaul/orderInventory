@@ -3,6 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:jersey-mvc-jsp="urn:org:glassfish:jersey:servlet:mvc">
 
 <h:head>
@@ -10,8 +11,9 @@
 </h:head>
 <h:body>
 	<h:form>
-	<h:inputText value="#{cat.name}" />
-	<h:commandButton action="#{bean.setCategory(cat)}" value="submit" />
+	<p:inputText value="#{name}"/>
+<!-- 	<h:inputText value="#{cat.name}" /> -->
+	<h:commandButton action="#{view}" value="submit" />
 	</h:form>
 </h:body>
 </html>
