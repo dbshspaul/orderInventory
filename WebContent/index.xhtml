@@ -6,14 +6,13 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:jersey-mvc-jsp="urn:org:glassfish:jersey:servlet:mvc">
 
+
 <h:head>
 	<title>hello world</title>
 </h:head>
 <h:body>
-	<h:form>
-	<p:inputText value="#{name}"/>
-<!-- 	<h:inputText value="#{cat.name}" /> -->
-	<h:commandButton action="#{view}" value="submit" />
-	</h:form>
+	<p:growl id="growl" showDetail="true" sticky="false" />
+	<p:commandButton value="Dont Like" type="button" onclick="window.location='response.xhtml'" />
+	<p:commandButton value="Like" type="button" onclick="window.location='categoryMaster.xhtml'" />
 </h:body>
 </html>
