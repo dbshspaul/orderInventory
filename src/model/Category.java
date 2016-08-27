@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.eclipse.persistence.jpa.config.Cascade;
 
 @ManagedBean
 @RequestScoped
@@ -24,7 +27,7 @@ public class Category implements Serializable {
 	@Column(length = 2000)
 	private String description;
 	
-	@OneToMany(mappedBy="category")
+	@OneToMany(mappedBy="category",cascade=CascadeType.ALL)
 	private List<Product> products;
 
 	public int getId() {

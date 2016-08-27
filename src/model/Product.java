@@ -1,11 +1,15 @@
 package model;
 
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@ManagedBean
+@ApplicationScoped
 @Entity
 public class Product {
 
@@ -14,8 +18,9 @@ public class Product {
 	private String name;
 	@Column(length = 2000)
 	private String description;
-	
-	@ManyToOne@JoinColumn(name="categoryId")
+
+	@ManyToOne
+	@JoinColumn(name = "categoryId")
 	private Category category;
 
 	public int getId() {
@@ -47,6 +52,7 @@ public class Product {
 	}
 
 	public void setCategory(Category category) {
+		System.out.println("catid: " + category.getId());
 		this.category = category;
 	}
 }

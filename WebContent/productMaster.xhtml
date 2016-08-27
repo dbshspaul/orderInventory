@@ -1,14 +1,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Product</title>
 </h:head>
 <h:body>
+	<p:growl id="growl" showDetail="true" sticky="true" />
+	<p:dialog widgetVar="dlg">
+		<h:form>
+			<p:panelGrid columns="2">
+				<f:facet name="header">Enter Category Details</f:facet>
+				<h:outputText value="Select Category: " />
+				<p:selectOneMenu value="#{bean.product.category}" converter="categoryConverter">
+				<f:selectItems value="#{bean.getAllCategories()}" var="cat" itemLabel="#{cat.name}" itemValue="#{cat}"/>
+				</p:selectOneMenu>
+				<h:outputText value="Product Name: "/>
+				<p:inputText value="#{bean.product.name}"
+					placeholder="Enter Category Name" required="true" />
+				<h:outputText value="Product Description: " />
+				<p:editor value="#{bean.product.description}" required="true" />
+				<p:commandButton action="#{bean.createProduct(product)}" value="submit"
+					update=":growl :pro_tbl" />
+			</p:panelGrid>
+		</h:form>
+	</p:dialog>
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" resizable="true" size="100" minSize="40" maxSize="200">
+		<p:layoutUnit position="north" resizable="true" size="100"
+			minSize="40" maxSize="200">
 			<p:breadCrumb>
 				<p:menuitem value="INV" url="index.xhtml" />
 				<p:menuitem value="Category" url="#" />
@@ -16,19 +40,35 @@
 
 		</p:layoutUnit>
 
-		<p:layoutUnit position="west" resizable="true" size="200" minSize="40" maxSize="200">
+		<p:layoutUnit position="west" resizable="true" size="200" minSize="40"
+			maxSize="200">
 			<ui:include src="sideMenu.xhtml"></ui:include>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<p:outputLabel value="Center" />
+			<p:commandButton value="Add Product" type="button"
+				onclick="PF('dlg').show()" />
+			<p:dataTable value="#{bean.getAllProducts()}" var="product" id="pro_tbl">
+				<f:facet name="header">Product list</f:facet>
+				<p:column headerText="ID">
+					<h:outputText value="#{product.id}" />
+				</p:column>
+				<p:column headerText="Name">
+					<h:outputText value="#{product.name}" />
+				</p:column>
+				<p:column headerText="Description">
+					<h:outputText value="#{product.description}" />
+				</p:column>
+			</p:dataTable>
 		</p:layoutUnit>
 
-		<p:layoutUnit position="east" resizable="true" size="100" minSize="40" maxSize="200">
+		<p:layoutUnit position="east" resizable="true" size="100" minSize="40"
+			maxSize="200">
 			<p:outputLabel value="East" />
 		</p:layoutUnit>
 
-		<p:layoutUnit position="south" resizable="true" size="100" minSize="40" maxSize="200">
+		<p:layoutUnit position="south" resizable="true" size="100"
+			minSize="40" maxSize="200">
 			<p:outputLabel value="South" />
 		</p:layoutUnit>
 	</p:layout>

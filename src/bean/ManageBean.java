@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 import model.Category;
@@ -19,11 +20,12 @@ public class ManageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Category cate;
+	@ManagedProperty("#{product}")
 	private Product product;
 	@EJB
 	private bean.EJB ejb;
 
-	public List<Category> getAllData() {
+	public List<Category> getAllCategories() {
 		return ejb.getAllData(Category.class);
 	}
 
@@ -63,8 +65,23 @@ public class ManageBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-		
+
+	private void createProduct(Product product) {
+		try {
+			ejb.setData(product);
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Product created susccessfully"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Message", e.getMessage()));
+			
+		}
+	}
+
+	public List<Product> getAllProducts() {
+		return ejb.getAllData(Product.class);
+	}
 
 	public Category getCate() {
 		return cate;
