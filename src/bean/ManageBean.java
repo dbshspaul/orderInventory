@@ -20,6 +20,7 @@ public class ManageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Category cate;
+	private List<Category> cates;
 	@ManagedProperty("#{product}")
 	private Product product;
 	@EJB
@@ -97,6 +98,14 @@ public class ManageBean implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public List<Category> getCates() {
+		return ejb.getAllData(Category.class);
+	}
+
+	public void setCates(List<Category> cates) {
+		this.cates = cates;
 	}
 
 }
