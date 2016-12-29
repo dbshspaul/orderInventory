@@ -12,8 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.eclipse.persistence.jpa.config.Cascade;
-
 @ManagedBean
 @RequestScoped
 @Entity
@@ -26,8 +24,8 @@ public class Category implements Serializable {
 	private String name;
 	@Column(length = 2000)
 	private String description;
-	
-	@OneToMany(mappedBy="category",cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 	private List<Product> products;
 
 	public int getId() {
@@ -60,6 +58,16 @@ public class Category implements Serializable {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		return (object instanceof Category) ? id == (((Category) object).id) : (object == this);
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) ((id != 0) ? (Category.class.hashCode() + id * 31) : super.hashCode());
 	}
 
 }

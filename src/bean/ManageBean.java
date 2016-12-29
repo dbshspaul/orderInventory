@@ -18,10 +18,12 @@ import model.Product;
 public class ManageBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@ManagedProperty("#{cate}")
 	private Category cate;
 	@ManagedProperty("#{product}")
 	private Product product;
+	private String testStr;
 	@EJB
 	private bean.EJB ejb;
 
@@ -32,11 +34,10 @@ public class ManageBean implements Serializable {
 	public void setCategory(Category cat) {
 		try {
 			ejb.setData(cat);
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "data added susccessfully"));
+			FacesContext.getCurrentInstance().addMessage("msg",
+					new FacesMessage("data added susccessfully"));
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Message", e.getMessage()));
+			FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(e.getMessage()));
 			e.printStackTrace();
 		}
 	}
@@ -66,8 +67,8 @@ public class ManageBean implements Serializable {
 		}
 	}
 
-	private void createProduct(Product product) {
-		try {
+	public void setNewProduct(Product product) {
+		try {			
 			ejb.setData(product);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Product created susccessfully"));
@@ -78,6 +79,11 @@ public class ManageBean implements Serializable {
 			
 		}
 	}
+	
+	public void testfunc(Category cat){
+		System.out.println("Method called.");
+	}
+	
 
 	public List<Product> getAllProducts() {
 		return ejb.getAllData(Product.class);
@@ -97,6 +103,14 @@ public class ManageBean implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public String getTestStr() {
+		return testStr;
+	}
+
+	public void setTestStr(String testStr) {
+		this.testStr = testStr;
 	}
 
 }
