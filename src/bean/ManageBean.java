@@ -21,6 +21,7 @@ public class ManageBean implements Serializable {
 	
 	@ManagedProperty("#{cate}")
 	private Category cate;
+	private List<Category> cates;
 	@ManagedProperty("#{product}")
 	private Product product;
 	private String testStr;
@@ -111,6 +112,14 @@ public class ManageBean implements Serializable {
 
 	public void setTestStr(String testStr) {
 		this.testStr = testStr;
+	}
+	
+	public List<Category> getCates() {
+		return ejb.getAllData(Category.class);
+	}
+
+	public void setCates(List<Category> cates) {
+		this.cates = cates;
 	}
 
 }
